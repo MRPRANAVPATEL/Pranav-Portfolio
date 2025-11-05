@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pranav Patel - Web Developer</title>
+    <title>Pranav Patel - MERN Stack Developer</title>
     
     <!-- Google Fonts: DM Serif Display (for headings) and Inter (for body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,7 @@
     <style>
         /* 1. Reset and Base Styles */
         :root {
-            /* === NEW "COOL" COLOR THEME: SLATE & VIOLET === */
+            /* === "COOL" COLOR THEME: SLATE & VIOLET === */
             --bg-dark: #0f172a;     /* Deep Slate */
             --bg-light: #1e293b;    /* Mid Slate */
             --text-light: #e2e8f0;    /* Light Slate Gray */
@@ -217,6 +217,16 @@
             position: relative;
         }
         
+        .hero-profile-img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%; /* Makes it circular */
+            border: 4px solid var(--bg-light); /* Nice border */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            margin: 0 auto 1.5rem auto; /* Center it and add margin below */
+            object-fit: cover;
+        }
+
         .hero-content {
             max-width: 750px;
         }
@@ -366,6 +376,49 @@
             color: var(--text-medium);
         }
 
+        /* NEW: Styles for the Skills/Toolkit Section */
+        #skills {
+            background-color: var(--bg-dark); /* Dark background like reference */
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background-color: var(--bg-light); /* Lighter card background */
+            border-radius: 8px;
+            padding: 1.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            border: 1px solid var(--bg-light);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .skill-card .skill-icon {
+            width: 40px;
+            height: 40px;
+            color: var(--accent); /* Icon color */
+        }
+
+        .skill-card h4 {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        /* END: New Skills Styles */
+
         /* 7. Projects Section */
         .projects-grid {
             display: grid;
@@ -387,6 +440,7 @@
         }
 
         .project-image {
+            width: 100%; /* Ensure image fills width */
             height: 250px;
             object-fit: cover;
             transition: transform 0.4s ease;
@@ -413,6 +467,7 @@
             font-size: 0.8rem;
             font-weight: 700;
             margin-right: 0.5rem;
+            margin-bottom: 0.5rem; /* Added for tag wrapping */
         }
 
         .project-content h3 {
@@ -426,16 +481,6 @@
         .project-content p {
             color: var(--text-medium);
             margin-bottom: 1.5rem;
-        }
-        
-        .project-link {
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .project-link:hover {
-            text-decoration: underline;
         }
         
         /* 8. Contact Section */
@@ -478,8 +523,17 @@
             resize: vertical;
         }
         
+        /* This class is no longer needed */
+        /*
         .submit-button {
             align-self: flex-start;
+        }
+        */
+
+        /* NEW STYLE for centering the contact button */
+        .contact-button-container {
+            text-align: center;
+            margin-top: 3rem;
         }
 
         /* 9. Footer */
@@ -565,19 +619,20 @@
                 grid-template-columns: repeat(3, 1fr);
             }
             
+            /* NEW: Skills grid on tablet */
+            .skills-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
             .projects-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .submit-button {
-                align-self: center;
+            /* NEW: Skills grid on desktop */
+            .skills-grid {
+                grid-template-columns: repeat(5, 1fr); /* 5x2 grid for 10 items */
             }
-        }
-        
-        /* Desktop */
-        @media (min-width: 1024px) {
-            .hero-content h1 { font-size: 6rem; }
-            
+
             .projects-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -598,6 +653,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
+                    <li><a href="#skills">Skills</a></li> <!-- ADDED LINK -->
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -625,6 +681,7 @@
         <a href="#home" class="mobile-nav-link">Home</a>
         <a href="#about" class="mobile-nav-link">About</a>
         <a href="#services" class="mobile-nav-link">Services</a>
+        <a href="#skills" class="mobile-nav-link">Skills</a> <!-- ADDED LINK -->
         <a href="#projects" class="mobile-nav-link">Projects</a>
         <a href="#contact" class="mobile-nav-link">Contact</a>
     </nav>
@@ -634,11 +691,18 @@
         <!-- Hero Section -->
         <section id="home">
             <div class="container hero-content">
-                <h1>I'm Pranav Patel.
-                    <span>A Web Developer.</span>
+                <!-- Added profile picture back -->
+                <img src="https://placehold.co/150x150/e2e8f0/0f172a?text=PP" 
+                     alt="Pranav Patel" 
+                     class="hero-profile-img animate-on-scroll fade-in-up"
+                     onerror="this.src='https://placehold.co/150x150/e2e8f0/0f172a?text=PP'">
+                
+                <h1 class="animate-on-scroll fade-in-up" style="animation-delay: 100ms;">I'm Pranav Patel.
+                    <!-- Updated Title -->
+                    <span>A MERN Stack Developer.</span>
                 </h1>
-                <p>I build exceptional and accessible digital experiences for the web.</p>
-                <a href="#projects" class="btn">View My Work</a>
+                <p class="animate-on-scroll fade-in-up" style="animation-delay: 200ms;">I build exceptional and accessible digital experiences for the web.</p>
+                <a href="#projects" class="btn animate-on-scroll fade-in-up" style="animation-delay: 300ms;">View My Work</a>
             </div>
             <div class="scroll-down">SCROLL &darr;</div>
         </section>
@@ -648,19 +712,22 @@
             <div class="container about-content">
                 <div class="about-text animate-on-scroll slide-in-left">
                     <h3>A bit about me.</h3>
+                    <!-- Updated with Resume Profile Summary -->
                     <p class="highlight">
-                        I'm a full-stack developer based in Mumbai, with a passion for building beautiful, functional, and user-centric applications.
+                        As a Computer Application graduate based in Adalaj, Gandhinagar, I possess full-stack development skills.
                     </p>
                     <p>
-                        With over 10 years of experience, I've honed my skills in turning complex problems into elegant, simple solutions. My expertise lies in the MERN stack (MongoDB, Express, React, Node.js), but I'm always eager to learn and adapt to new technologies.
+                        I am proficient in building responsive frontends with HTML, CSS, JavaScript, Bootstrap, and ReactJS, and developing robust backend services using NodeJS and ExpressJS.
                     </p>
                     <p>
-                        When I'm not coding, you can find me exploring new hiking trails, trying to perfect my biryani recipe, or contributing to open-source projects.
+                        My experience extends to database management with both MongoDB and MySQL. A quick learner with proven adaptability from academic projects, I am eager to apply my strong problem-solving abilities and attention to detail to create impactful web solutions.
                     </p>
                 </div>
+                <!-- Kept your image path, added an onerror fallback -->
                 <img src="./portfolioimg.png" 
                      alt="Portrait of Pranav Patel" 
-                     class="about-image animate-on-scroll slide-in-right">
+                     class="about-image animate-on-scroll slide-in-right"
+                     onerror="this.src='https://placehold.co/600x800/e2e8f0/1f2937?text=Pranav+Patel'">
             </div>
         </section>
 
@@ -679,7 +746,7 @@
                             <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle>
                         </svg>
                         <h3>UI/UX Design</h3>
-                        <p>Crafting intuitive and beautiful user interfaces that are a joy to use, from initial wireframes in Figma to pixel-perfect code.</p>
+                        <p>Crafting intuitive and beautiful user interfaces that are a joy to use, from initial concepts to pixel-perfect code.</p>
                     </div>
                     <!-- Service Card 2 -->
                     <div class="service-card animate-on-scroll fade-in-up" style="animation-delay: 200ms;">
@@ -687,7 +754,8 @@
                             <polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline>
                         </svg>
                         <h3>Front-End Development</h3>
-                        <p>Building responsive, high-performance websites and applications using modern technologies like React, Next.js, and TypeScript.</p>
+                        <!-- Updated Description -->
+                        <p>Building responsive, high-performance websites using modern technologies like ReactJS, JavaScript, Bootstrap, HTML5, and CSS3.</p>
                     </div>
                     <!-- Service Card 3 -->
                     <div class="service-card animate-on-scroll fade-in-up" style="animation-delay: 300ms;">
@@ -695,11 +763,76 @@
                             <path d="M12 20V10"></path><path d="M18 20V4"></path><path d="M6 20V16"></path>
                         </svg>
                         <h3>Back-End & API</h3>
-                        <p>Designing and building robust, scalable server-side applications and RESTful APIs with Node.js, Express, and databases like MongoDB.</p>
+                        <!-- Updated Description -->
+                        <p>Designing robust, scalable server-side applications and RESTful APIs with NodeJS, ExpressJS, and databases like MongoDB & MySQL.</p>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- NEW SKILLS / TOOLKIT SECTION -->
+        <section id="skills">
+            <div class="container">
+                <div class="section-header animate-on-scroll fade-in-up">
+                    <p>My Arsenal</p>
+                    <h2>Technical Toolkit</h2>
+                </div>
+
+                <div class="skills-grid">
+                    <!-- Skill 1: HTML5 -->
+                    <div class="skill-card animate-on-scroll fade-in-up" style="animation-delay: 100ms;">
+                        <svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3l-1 16h18l-1-16H4zm1 3h14l-.5 8H5.5L6 6zM5 18h1.5l.5-2h10l.5 2H19l-1-12H5l-1 12z"/></svg>
+                        <h4>HTML5</h4>
+                    </div>
+                    <!-- Skill 2: CSS3 -->
+                    <div class="skill-card animate-on-scroll fade-in-up" style="animation-delay: 150ms;">
+                        <svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3l-1 16h18l-1-16H4zm1 3h14l-.5 8H5.5L6 6zM5 18h1.5l.5-2h10l.5 2H19l-1-12H5l-1 12z"/><circle cx="7.5" cy="12.5" r="1.5"/><circle cx="12" cy="12" r="1"/></svg>
+                        <h4>CSS3</h4>
+                    </div>
+                    <!-- Skill 3: JavaScript -->
+                    <div class="skill-card animate-on-scroll fade-in-up" style="animation-delay: 200ms;">
+                        <svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+                        <h4>JavaScript</h4>
+                    </div>
+                    <!-- Skill 4: ReactJS -->
+                    <div class="skill-card animate-on-scroll fade-in-up" style="animation-delay: 250ms;">
+                        <svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"></circle><path d="M16.24 7.76l-2.12 6.36m-6.36 2.12l6.36-2.12M7.76 16.24l2.12-6.36m6.36-2.12l-6.36 2.12"></path><ellipse cx="12" cy="12" rx="11" ry="4.2"></ellipse><ellipse cx="12" cy="12" rx="11" ry="4.2" transform="rotate(60 12 12)"></ellipse><ellipse cx="12" cy="12" rx="11" ry="4.2" transform="rotate(120 12 12)"></ellipse></svg>
+                        <h4>ReactJS</h4>
+                    </div>
+                    <!-- Skill 5: NodeJS -->
+                    <div class="skill-card animate-on-scroll fade-in-up" style="animation-delay: 300ms;">
+                        <svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l-5.2 9h10.4L12 2zm0 20l-5.2-9h10.4L12 22zm-7.9-6L12 7.7 19.9 16H4.1zM4.1 8L12 16.3 19.9 8H4.1z"/></svg>
+                        <h4>NodeJS</h4>
+                    </div>
+                    <!-- Skill 6: ExpressJs -->
+                    <div class="skill-card animate-on-scroll fade-in-up" style="animation-delay: 350ms;">
+                        <svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l.7 4.4L18 10l-6 2-6-2 5.3-3.6.7-4.4z"/><path d="M12 10l.7 4.4L18 18l-6 2-6-2 5.3-3.6.7-4.4z"/></svg>
+                        <h4>ExpressJS</h4>
+                    </div>
+                    <!-- Skill 7: Bootstrap -->
+                    <div class="skill-card animate-on-scroll fade-in-up" style="animation-delay: 400ms;">
+                        <svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M9 9h6v6H9z"/><path d="M10.5 9v6M13.5 9v6M9 10.5h6M9 13.5h6"/></svg>
+                        <h4>Bootstrap</h4>
+                    </div>
+                    <!-- Skill 8: MySQL -->
+                    <div class="skill-card animate-on-scroll fade-in-up" style="animation-delay: 450ms;">
+                        <svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                        <h4>MySQL</h4>
+                    </div>
+                    <!-- Skill 9: MongoDB -->
+                    <div class="skill-card animate-on-scroll fade-in-up" style="animation-delay: 500ms;">
+                        <svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path d="M12 17.6c-3.08 0-5.6-2.52-5.6-5.6s2.52-5.6 5.6-5.6c.3 0 .59.02.88.07C12.53 7.6 12 9.24 12 11c0 1.76.53 3.4 1.48 4.53-.29.05-.58.07-.88.07z"/></svg>
+                        <h4>MongoDB</h4>
+                    </div>
+                    <!-- Skill 10: GitHub -->
+                    <div class="skill-card animate-on-scroll fade-in-up" style="animation-delay: 550ms;">
+                        <svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        <h4>GitHub</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END NEW SKILLS SECTION -->
 
         <!-- Projects Section -->
         <section id="projects">
@@ -710,44 +843,46 @@
                 </div>
                 
                 <div class="projects-grid">
-                    <!-- Project 1 -->
+                    <!-- Project 1 (From Resume) -->
                     <div class="project-card animate-on-scroll fade-in-up" style="animation-delay: 100ms;">
-                        <img src="https://placehold.co/600x400/6d28d9/f3f4f6?text=Project+Alpha" alt="Project Alpha" class="project-image" onerror="this.src='https://placehold.co/600x400/6d28d9/f3f4f6?text=Image+Not+Found'">
+                        <img src="https://placehold.co/600x400/6d28d9/f3f4f6?text=JobSphere+Portal" alt="JobSphere (Job Portal)" class="project-image" onerror="this.src='https://placehold.co/600x400/6d28d9/f3f4f6?text=Image+Not+Found'">
                         <div class="project-content">
                             <div class="project-tags">
                                 <span class="tag">React</span>
                                 <span class="tag">Node.js</span>
+                                <span class="tag">Express.js</span>
+                                <span class="tag">MySQL</span>
                             </div>
-                            <h3>E-commerce Platform</h3>
-                            <p>A full-stack e-commerce solution with cart, payments, and an admin dashboard.</p>
-                             
+                            <h3>JobSphere (Job Portal)</h3>
+                            <p>Built a full-stack job portal with a Node/Express REST API and a React frontend. Implemented auth, CRUD, and job filtering.</p>
                         </div>
                     </div>
                     
-                    <!-- Project 2 -->
-                    <div class="project-card animate-on-scroll fade-in-up" style="animation-delay: 100ms;">
-                        <img src="https://placehold.co/600x400/6d28d9/f3f4f6?text=Project+Alpha" alt="Project Alpha" class="project-image" onerror="this.src='https://placehold.co/600x400/6d28d9/f3f4f6?text=Image+Not+Found'">
+                    <!-- Project 2 (From Resume) -->
+                    <div class="project-card animate-on-scroll fade-in-up" style="animation-delay: 200ms;">
+                        <img src="https://placehold.co/600x400/1e293b/f3f4f6?text=Shopping+Website" alt="Online Shopping Website" class="project-image" onerror="this.src='https://placehold.co/600x400/1e293b/f3f4f6?text=Image+Not+Found'">
                         <div class="project-content">
                             <div class="project-tags">
                                 <span class="tag">React</span>
-                                <span class="tag">Node.js</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">CSS</span>
                             </div>
-                            <h3>E-commerce Platform</h3>
-                            <p>A full-stack e-commerce solution with cart, payments, and an admin dashboard.</p>
-                             
+                            <h3>Online Shopping Website</h3>
+                            <p>Customized React e-commerce template with product listing, add-to-cart, checkout, and simple user authentication.</p>
                         </div>
                     </div>
                     
-                    <!-- Project 3 -->
+                    <!-- Project 3 (From Resume) -->
                     <div class="project-card animate-on-scroll fade-in-up" style="animation-delay: 300ms;">
-                        <img src="https://placehold.co/600x400/8b5cf6/111827?text=Project+Gamma" alt="Project Gamma" class="project-image" onerror="this.src='https://placehold.co/600x400/8b5cf6/111827?text=Image+Not+Found'">
+                        <img src="https://placehold.co/600x400/8b5cf6/111827?text=CSS+Generator" alt="CSS Style Generator" class="project-image" onerror="this.src='https://placehold.co/600x400/8b5cf6/111827?text=Image+Not+Found'">
                         <div class="project-content">
                             <div class="project-tags">
-                                <span class="tag">React Native</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
                             </div>
-                            <h3>Mobile Fitness App</h3>
-                            <p>A cross-platform mobile app for tracking workouts and nutrition.</p>
-                             
+                            <h3>CSS Style Generator</h3>
+                            <p>An interactive tool to customize CSS properties with a live preview and auto-generated code for easy use.</p>
                         </div>
                     </div>
                 </div>
@@ -762,6 +897,7 @@
                     <h2>Let's build something.</h2>
                 </div>
                 
+                <!-- 
                 <form class="contact-form animate-on-scroll fade-in-up" action="#" method="POST">
                     <div class="form-group">
                         <label for="name" class="sr-only">Full Name</label>
@@ -777,6 +913,12 @@
                     </div>
                     <button type="submit" class="btn submit-button">Send Message</button>
                 </form>
+                -->
+
+                <!-- ADDED new mailto button -->
+                <div class="contact-button-container animate-on-scroll fade-in-up" style="animation-delay: 100ms;">
+                    <a href="mailto:pranav52.patel@gmail.com" class="btn">Say Hello</a>
+                </div>
             </div>
         </section>
 
@@ -791,7 +933,8 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#projects">Projects</a></li>
             </ul>
-            <p>&copy; 2025 Pranav Patel. Built with &hearts; in Mumbai.</p>
+            <!-- Updated Location -->
+            <p>&copy; 2025 Pranav Patel. Built with &hearts; in Gandhinagar.</p>
         </div>
     </footer>
 
