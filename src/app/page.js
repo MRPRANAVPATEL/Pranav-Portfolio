@@ -285,18 +285,56 @@ export default function Home() {
               <div>
                 <form
                   className="contact-form"
-                  action="https://formsubmit.co/pranav52.patel@gmail.com"
-                  method="POST"
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+
+                    const form = e.target;
+
+                    const formData = {
+                      name: form.name.value,
+                      email: form.email.value,
+                      message: form.message.value,
+                    };
+
+                    try {
+                      const res = await fetch("/api/contact", {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(formData),
+                      });
+
+                      const data = await res.json();
+
+                      if (data.success) {
+                        alert("Message sent successfully 🚀");
+                        form.reset();
+                      } else {
+                        alert(data.error || "Something went wrong 😅");
+                      }
+                    } catch (err) {
+                      console.error(err);
+                      alert("Server error 😵");
+                    }
+                  }}
                 >
-                  <input type="hidden" name="_captcha" value="false" />
-                  <input type="hidden" name="_subject" value="New Portfolio Message! 🚀" />
-                  <input type="hidden" name="_template" value="table" />
-
                   <input type="text" name="name" placeholder="Your Name" required />
-                  <input type="email" name="email" placeholder="Email address" required />
-                  <textarea name="message" rows={4} placeholder="Tell me about your project or idea..." required></textarea>
 
-                  <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
+                  <input type="email" name="email" placeholder="Email address" required />
+
+                  <textarea
+                    name="message"
+                    rows={4}
+                    placeholder="Tell me about your project or idea..."
+                    required
+                  ></textarea>
+
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    style={{ width: "100%", justifyContent: "center" }}
+                  >
                     <i className="fas fa-paper-plane"></i> Send Message
                   </button>
                 </form>
