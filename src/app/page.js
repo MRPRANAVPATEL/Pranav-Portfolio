@@ -296,9 +296,7 @@ export default function Home() {
                       message: form.message.value,
                     };
 
-                    // remove old message if exists
-                    const oldMsg = form.querySelector(".form-status");
-                    if (oldMsg) oldMsg.remove();
+
 
                     try {
                       const res = await fetch("/api/contact", {
@@ -331,6 +329,7 @@ export default function Home() {
                     } catch (err) {
                       console.error(err);
 
+                      // show server error msg
                       const msgDiv = document.createElement("div");
                       msgDiv.className = "form-status error";
                       msgDiv.innerText = "Server error 😵";
@@ -341,6 +340,9 @@ export default function Home() {
                         msgDiv.remove();
                       }, 3000);
                     }
+                    // remove old message if exists
+                    const oldMsg = form.querySelector(".form-status");
+                    if (oldMsg) oldMsg.remove();
                   }}
                 >
                   <input type="text" name="name" placeholder="Your Name" required />
