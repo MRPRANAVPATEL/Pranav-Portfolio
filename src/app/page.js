@@ -296,7 +296,9 @@ export default function Home() {
                       message: form.message.value,
                     };
 
-
+                    // remove old message if exists
+                    const oldMsg = form.querySelector(".form-status");
+                    if (oldMsg) oldMsg.remove();
 
                     try {
                       const res = await fetch("/api/contact", {
@@ -340,9 +342,6 @@ export default function Home() {
                         msgDiv.remove();
                       }, 3000);
                     }
-                    // remove old message if exists
-                    const oldMsg = form.querySelector(".form-status");
-                    if (oldMsg) oldMsg.remove();
                   }}
                 >
                   <input type="text" name="name" placeholder="Your Name" required />
