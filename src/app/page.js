@@ -296,6 +296,10 @@ export default function Home() {
                       message: form.message.value,
                     };
 
+                    // remove old message if exists
+                    const oldMsg = form.querySelector(".form-status");
+                    if (oldMsg) oldMsg.remove();
+
                     try {
                       const res = await fetch("/api/contact", {
                         method: "POST",
@@ -307,15 +311,35 @@ export default function Home() {
 
                       const data = await res.json();
 
+                      const msgDiv = document.createElement("div");
+                      msgDiv.className = `form-status ${data.success ? "success" : "error"}`;
+                      msgDiv.innerText = data.success
+                        ? "Message sent successfully 🚀"
+                        : data.error || "Something went wrong 😅";
+
+                      form.prepend(msgDiv);
+
                       if (data.success) {
-                        alert("Message sent successfully 🚀");
                         form.reset();
-                      } else {
-                        alert(data.error || "Something went wrong 😅");
                       }
+
+                      // auto remove after 3 sec
+                      setTimeout(() => {
+                        msgDiv.remove();
+                      }, 3000);
+
                     } catch (err) {
                       console.error(err);
-                      alert("Server error 😵");
+
+                      const msgDiv = document.createElement("div");
+                      msgDiv.className = "form-status error";
+                      msgDiv.innerText = "Server error 😵";
+
+                      form.prepend(msgDiv);
+
+                      setTimeout(() => {
+                        msgDiv.remove();
+                      }, 3000);
                     }
                   }}
                 >
